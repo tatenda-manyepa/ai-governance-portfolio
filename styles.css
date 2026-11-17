@@ -155,3 +155,33 @@ footer{border-top:1px solid #557064}
 footer .foot{display:grid;justify-content:center;gap:.25rem;min-height:0;padding-block:1.6rem;text-align:center}
 .foot p{margin:0}
 .foot-credit{color:#b6cabd;font-size:.8rem}
+
+/* Flagship project card */
+.card.feature{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(1.25rem,4vw,3rem);margin-top:2rem;padding:clamp(1.35rem,3vw,2.25rem)}
+.feature-main{display:flex;flex-direction:column;align-items:flex-start}
+.card.feature h3{font:500 clamp(1.8rem,3.5vw,2.6rem)/1.1 Georgia,serif;letter-spacing:-.02em}
+.feature-q{font-size:1.13rem;font-weight:650}
+.feature-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:0;align-content:start}
+.feature-stats div{padding:.85rem;background:#ebeee3;border:1px solid var(--line);border-radius:.4rem}
+.feature-stats dt{font:500 1.55rem/1.1 Georgia,serif;color:var(--forest)}
+.feature-stats dd{margin:.3rem 0 0;font-size:.88rem;color:var(--muted);line-height:1.4}
+@media(max-width:900px){.card.feature{grid-template-columns:1fr}}
+
+/* Case study page */
+.casebody>div>section{padding-bottom:2.5rem;margin-bottom:2.5rem;border-bottom:1px solid var(--line)}
+.casebody>div>section:last-child{border-bottom:0;margin-bottom:0}
+.casebody h2{font-size:clamp(1.8rem,3.2vw,2.5rem)}
+.case-note{display:inline-block;margin-top:.4rem;padding:.45rem .7rem;border:1px solid #557064;border-radius:.3rem;color:#d8e5da;font-size:.9rem}
+.case-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.95rem}
+.case-table th,.case-table td{padding:.6rem .55rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.case-table th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.case-table .ai{font-weight:750;color:#234737}
+.feature-stats.inline{margin:1rem 0}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{padding:.55rem 0;border-top:1px solid #c8d0c3}
+.checklist b{display:inline-block;min-width:5.2rem;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+.checklist .done b{color:#234737}.checklist .doing b{color:#7a5a12}.checklist .todo b{color:var(--muted)}
+.evidence{position:sticky;top:calc(var(--header-height,72px) + 1rem)}
+.evidence h3{font-size:1rem;margin-top:1.4rem}
+blockquote.case-quote{margin:1rem 0;padding:.9rem 1.1rem;border-left:3px solid #496e56;background:#fffdf7;font-family:Georgia,serif;font-size:1.15rem}
+@media(max-width:680px){.evidence{position:static}.case-table{font-size:.88rem}}

@@ -1,0 +1,71 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="PickPath Copilot: an AI incident assistant for a fictional automated warehouse, by Tatenda Manyepa."><title>PickPath Copilot | Tatenda Manyepa</title><link rel="stylesheet" href="styles.css"></head><body><a class="skip" href="#main">Skip to content</a><header><nav class="wrap" aria-label="Main navigation"><a class="brand" href="index.html"><b aria-hidden="true">TM</b> <span class="brand-name">Tatenda Manyepa</span></a><div class="navlinks"><a href="index.html#work">Case studies</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a></div></nav></header>
+<main id="main">
+<section class="casehero"><div class="wrap"><a class="back" href="index.html#work">← Back to the portfolio</a><p class="kicker">Flagship project / Solution design / Warehouse automation</p><span class="status s1">In build · demo coming</span><h1>PickPath Copilot</h1><p class="intro">Can AI help an engineer find the cause of a robot incident faster, without ever touching the robots?</p><p class="case-note">Independent project built on invented data. No Inteq customer, system, data or fault code is used.</p></div></section>
+
+<div class="wrap section casebody"><div>
+
+<section aria-labelledby="problem"><p class="kicker">01 / THE PROBLEM</p><h2 id="problem">Incidents cross layers. Investigations cross tools.</h2>
+<p><strong>Northgate Fulfilment</strong> (fictional) runs a 24/7 e-commerce distribution centre near the M1. Its warehouse management system releases about 2,000 order lines an hour. A warehouse control system turns them into jobs for 40 autonomous mobile robots, which bring totes from automated storage to six pick stations.</p>
+<p>When something fails, the symptom and the cause sit in different places. Pick station 3 goes idle, but the cause is a charger fault in another part of the building. Engineers spend most of each incident searching telemetry, logs, past tickets and runbooks in separate tools.</p>
+<dl class="feature-stats inline"><div><dt>25</dt><dd>significant incidents a month</dd></div><div><dt>70 min</dt><dd>average to resolve, about 40 of them spent investigating</dd></div><div><dt>£8,000</dt><dd>of shipped value lost per hour of full stoppage</dd></div><div><dt>3</dt><dd>missed carrier cut-offs a month</dd></div></dl>
+<p class="muted">All figures are stated assumptions for the fictional site.</p></section>
+
+<section aria-labelledby="judgement"><p class="kicker">02 / DISCOVERY AND JUDGEMENT</p><h2 id="judgement">AI for two incident types, not five</h2>
+<p>Before designing anything, I sorted the site’s common incidents by what would fix them best. AI earns its place only where the cause is spread across several sources and changes from one incident to the next.</p>
+<table class="case-table"><thead><tr><th scope="col">Incident type</th><th scope="col">Best fix</th><th scope="col">Why</th></tr></thead><tbody>
+<tr><td>Robot fault blocks an aisle</td><td class="ai">AI copilot</td><td>Cause spans telemetry, maps and tickets</td></tr>
+<tr><td>Robots queue at a failed charger</td><td class="ai">AI copilot</td><td>The symptom (an idle station) is far from the cause</td></tr>
+<tr><td>Warehouse system messages rejected</td><td>Automated check and alert</td><td>Same signature every time; a rule is cheaper</td></tr>
+<tr><td>Robot battery below threshold</td><td>Better alerting</td><td>One metric, one threshold</td></tr>
+<tr><td>Recurring conveyor jam at one merge</td><td>Maintenance fix</td><td>Known cause; it needs an engineering fix, not AI</td></tr>
+</tbody></table></section>
+
+<section aria-labelledby="solution"><p class="kicker">03 / THE SOLUTION</p><h2 id="solution">One question, answered with evidence</h2>
+<p>The copilot answers one question well: <em>what is most likely causing this incident, and what does the evidence say?</em></p>
+<ol class="method">
+<li><h3>Describe the incident</h3><p>An engineer types what they see, in plain English.</p></li>
+<li><h3>Gather the evidence</h3><p>The copilot searches robot telemetry, control system logs, past tickets and runbooks, using only records from before the incident was reported.</p></li>
+<li><h3>Explain the likely cause</h3><p>It returns the likely cause, the evidence behind it with sources, a similar past incident and the runbook step to try.</p></li>
+<li><h3>Engineer decides</h3><p>The engineer approves or rejects the recommendation, and the decision is logged.</p></li>
+</ol>
+<p><strong>Deliberately out of scope:</strong> sending any command to robots, conveyors or control systems; replacing monitoring and alerting; production deployment.</p>
+<blockquote class="case-quote">“Pick station 3 has been idle for 12 minutes. Operators are waiting for totes.”</blockquote>
+<p>In the demo, the copilot has to connect a charger fault, a second charger already in planned maintenance, five robots queuing at low battery and two more blocked behind them. It also has to ignore two decoys: a past ticket with the same symptom but a different cause, and an unrelated error logged at the same time.</p>
+<p class="muted">Built with Python and Streamlit on Amazon Bedrock (Claude Sonnet 4.6, EU inference profile). Architecture diagram coming with the demo.</p></section>
+
+<section aria-labelledby="value"><p class="kicker">04 / BUSINESS CASE</p><h2 id="value">Pays back within a quarter, even at half the benefit</h2>
+<p>If the copilot cuts investigation time from 40 to 15 minutes, the site avoids about £23,000 a month in downtime, engineer time and late-delivery penalties. Assuming only half of that is realised, and after £1,000 a month in running costs, a £25,000 pilot pays back in about 2.4 months.</p>
+<dl class="feature-stats inline"><div><dt>~10 hrs</dt><dd>of lost throughput recovered a month (25 incidents × 25 minutes)</dd></div><div><dt>~2.4 months</dt><dd>payback on a £25k pilot at 50% realised benefit</dd></div></dl>
+<p class="muted">Every figure is an assumption I would test with the customer during discovery.</p></section>
+
+<section aria-labelledby="governance"><p class="kicker">05 / RISKS AND GOVERNANCE</p><h2 id="governance">The copilot advises. An engineer decides.</h2>
+<table class="case-table"><thead><tr><th scope="col">Risk</th><th scope="col">Control</th></tr></thead><tbody>
+<tr><td>AI suggests the wrong cause</td><td>Every answer cites its evidence; no evidence, no recommendation; engineer approval required</td></tr>
+<tr><td>Unsafe action on physical equipment</td><td>Strictly read-only, with no write access to robots, conveyors or control systems</td></tr>
+<tr><td>Sensitive operational data exposed</td><td>Least-privilege access; data stays in the company’s cloud account</td></tr>
+<tr><td>Accuracy drifts as the site changes</td><td>Monthly test against known incidents; new tickets added to the knowledge base</td></tr>
+<tr><td>Nobody owns it after launch</td><td>Named owner in operations; rollback means switching it off, with the existing process unchanged</td></tr>
+</tbody></table>
+<p><strong>Before production:</strong> a formal accuracy evaluation, access control and audit, a security review, and a one-site pilot with success criteria agreed up front.</p></section>
+
+</div>
+<aside class="evidence" aria-labelledby="progress"><p class="kicker">06 / BUILD LOG</p><h2 id="progress">Progress</h2>
+<ul class="checklist">
+<li class="done"><b>Done</b> Fictional dataset: telemetry, logs, 20 past tickets, 5 runbooks</li>
+<li class="done"><b>Done</b> Amazon Bedrock access with a model-only IAM user</li>
+<li class="doing"><b>Next</b> Streamlit prototype with cited answers</li>
+<li class="todo"><b>Planned</b> Accuracy test on planted incidents</li>
+<li class="todo"><b>Planned</b> 3-minute demo video</li>
+</ul>
+<h3>Decisions so far</h3>
+<ul class="checklist">
+<li>Evidence is filtered to the time the incident was reported, so the copilot cannot read the answer</li>
+<li>The app’s cloud user can only call the AI model and nothing else</li>
+<li>Data stays in Europe, using an EU inference profile</li>
+</ul>
+<h3>Coming with the demo</h3>
+<ul class="checklist">
+<li>Demo video</li><li>GitHub repository</li><li>Architecture diagram</li>
+</ul></aside>
+</div></main>
+<footer><div class="wrap foot"><p>Solutions Engineering <span aria-hidden="true">·</span> Warehouse Automation &amp; AI</p><p class="foot-credit">© 2026 Tatenda Manyepa</p></div></footer></body></html>
