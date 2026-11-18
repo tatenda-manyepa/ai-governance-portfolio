@@ -208,3 +208,12 @@ blockquote.case-quote{margin:1rem 0;padding:.9rem 1.1rem;border-left:3px solid #
 .role-list{list-style:none;padding:0;margin:1rem 0}
 .role-list li{padding:.5rem 0;border-top:1px solid var(--line)}
 .degrees a.credential{padding:.55rem .8rem;border:1px solid #b9c7ba}
+
+/* Hero refinements */
+.hero-grid{padding-block:clamp(2.5rem,5vw,4.25rem)}
+.hero h1{font-size:clamp(2.4rem,4.4vw,4rem)}
+.proof{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0 0 1.6rem;padding:0}
+.proof li{padding:.35rem .7rem;border:1px solid #587269;border-radius:999px;background:#1c3930;color:#e6efe3;font-size:.88rem;font-weight:650}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem}
+.button-ghost{display:inline-flex;gap:.6rem;padding:.8rem 1rem;border:1px solid #75937e;color:var(--paper);font-weight:750;text-decoration:none}
+.button-ghost:is(:hover,:focus-visible){background:#28463b;border-color:var(--accent)}
