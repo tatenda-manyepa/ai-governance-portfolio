@@ -31,14 +31,26 @@
 <p><strong>Deliberately out of scope:</strong> sending any command to robots, conveyors or control systems; replacing monitoring and alerting; production deployment.</p>
 <blockquote class="case-quote">“Pick station 3 has been idle for 12 minutes. Operators are waiting for totes.”</blockquote>
 <p>In the demo, the copilot has to connect a charger fault, a second charger already in planned maintenance, five robots queuing at low battery and two more blocked behind them. It also has to ignore two decoys: a past ticket with the same symptom but a different cause, and an unrelated error logged at the same time.</p>
-<p class="muted">Built with Python and Streamlit on Amazon Bedrock (Claude Sonnet 4.6, EU inference profile). Architecture diagram coming with the demo.</p></section>
+<p class="muted">Built with Python and Streamlit on Amazon Bedrock (Claude Sonnet 4.6, EU inference profile). See the cloud design below; the architecture diagram is coming with the demo.</p></section>
 
 <section aria-labelledby="value"><p class="kicker">04 / BUSINESS CASE</p><h2 id="value">Pays back within a quarter, even at half the benefit</h2>
 <p>If the copilot cuts investigation time from 40 to 15 minutes, the site avoids about £23,000 a month in downtime, engineer time and late-delivery penalties. Assuming only half of that is realised, and after £1,000 a month in running costs, a £25,000 pilot pays back in about 2.4 months.</p>
 <dl class="feature-stats inline"><div><dt>~10 hrs</dt><dd>of lost throughput recovered a month (25 incidents × 25 minutes)</dd></div><div><dt>~2.4 months</dt><dd>payback on a £25k pilot at 50% realised benefit</dd></div></dl>
 <p class="muted">Every figure is an assumption I would test with the customer during discovery.</p></section>
 
-<section aria-labelledby="governance"><p class="kicker">05 / RISKS AND GOVERNANCE</p><h2 id="governance">The copilot advises. An engineer decides.</h2>
+<section aria-labelledby="cloud"><p class="kicker">05 / CLOUD DESIGN</p><h2 id="cloud">Prototype now, production-ready design</h2>
+<p>The prototype keeps costs and moving parts low. The production design shows how it would run safely inside a customer’s AWS account.</p>
+<table class="case-table"><thead><tr><th scope="col">Layer</th><th scope="col">Prototype</th><th scope="col">Production design</th></tr></thead><tbody>
+<tr><td>Data</td><td>Fictional dataset files</td><td>Logs and telemetry copied one way into Amazon S3</td></tr>
+<tr><td>Evidence search</td><td>Python filters records by time and relevance</td><td>Amazon Bedrock Knowledge Bases over S3</td></tr>
+<tr><td>AI model</td><td>Claude Sonnet 4.6 on Amazon Bedrock, EU inference profile</td><td>Same model, with Bedrock Guardrails</td></tr>
+<tr><td>App</td><td>Streamlit in a cloud dev environment</td><td>Container on Amazon ECS Fargate behind company sign-in</td></tr>
+<tr><td>Access</td><td>IAM user that can only call the model</td><td>Separate least-privilege IAM role for each component</td></tr>
+<tr><td>Cost and monitoring</td><td>£10 monthly budget alarm</td><td>CloudWatch usage alarms, dashboards and a monthly budget cap</td></tr>
+</tbody></table>
+<p>The design follows AWS Well-Architected priorities: <strong>security</strong> through read-only access and least privilege, <strong>cost</strong> through pay-per-use AI and budget alarms, and <strong>reliability</strong> through a simple rollback, because switching the copilot off leaves the existing process unchanged.</p></section>
+
+<section aria-labelledby="governance"><p class="kicker">06 / RISKS AND GOVERNANCE</p><h2 id="governance">The copilot advises. An engineer decides.</h2>
 <table class="case-table"><thead><tr><th scope="col">Risk</th><th scope="col">Control</th></tr></thead><tbody>
 <tr><td>AI suggests the wrong cause</td><td>Every answer cites its evidence; no evidence, no recommendation; engineer approval required</td></tr>
 <tr><td>Unsafe action on physical equipment</td><td>Strictly read-only, with no write access to robots, conveyors or control systems</td></tr>
@@ -49,13 +61,14 @@
 <p><strong>Before production:</strong> a formal accuracy evaluation, access control and audit, a security review, and a one-site pilot with success criteria agreed up front.</p></section>
 
 </div>
-<aside class="evidence" aria-labelledby="progress"><p class="kicker">06 / BUILD LOG</p><h2 id="progress">Progress</h2>
+<aside class="evidence" aria-labelledby="progress"><p class="kicker">07 / BUILD LOG</p><h2 id="progress">Progress</h2>
 <ul class="checklist">
-<li class="done"><b>Done</b> Fictional dataset: telemetry, logs, 20 past tickets, 5 runbooks</li>
-<li class="done"><b>Done</b> Amazon Bedrock access with a model-only IAM user</li>
-<li class="doing"><b>Next</b> Streamlit prototype with cited answers</li>
+<li class="done"><b>17 Nov</b> Fictional dataset: telemetry, logs, 20 past tickets, 5 runbooks, 5 test incidents</li>
+<li class="done"><b>17 Nov</b> Amazon Bedrock access, budget alarm and a model-only IAM user</li>
+<li class="doing"><b>Next</b> GitHub repository and cloud dev environment</li>
+<li class="todo"><b>Planned</b> Streamlit prototype with cited answers</li>
 <li class="todo"><b>Planned</b> Accuracy test on planted incidents</li>
-<li class="todo"><b>Planned</b> 3-minute demo video</li>
+<li class="todo"><b>Planned</b> 3-minute demo video and architecture diagram</li>
 </ul>
 <h3>Decisions so far</h3>
 <ul class="checklist">
@@ -68,4 +81,4 @@
 <li>Demo video</li><li>GitHub repository</li><li>Architecture diagram</li>
 </ul></aside>
 </div></main>
-<footer><div class="wrap foot"><p>Solutions Engineering <span aria-hidden="true">·</span> Warehouse Automation &amp; AI</p><p class="foot-credit">© 2026 Tatenda Manyepa</p></div></footer></body></html>
+<footer><div class="wrap foot"><p>Solutions Engineering <span aria-hidden="true">·</span> Cloud, AI &amp; Warehouse Automation</p><p class="foot-credit">© 2026 Tatenda Manyepa</p></div></footer></body></html>

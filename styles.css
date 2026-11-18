@@ -185,3 +185,26 @@ footer .foot{display:grid;justify-content:center;gap:.25rem;min-height:0;padding
 .evidence h3{font-size:1rem;margin-top:1.4rem}
 blockquote.case-quote{margin:1rem 0;padding:.9rem 1.1rem;border-left:3px solid #496e56;background:#fffdf7;font-family:Georgia,serif;font-size:1.15rem}
 @media(max-width:680px){.evidence{position:static}.case-table{font-size:.88rem}}
+
+/* How I work */
+.how-i-work{margin-top:1.25rem}
+.how-i-work ol{list-style:none;margin:.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem}
+.how-i-work a{display:flex;flex-direction:column;gap:.25rem;height:100%;padding:1rem;background:#fffdf7;border:1px solid var(--line);border-radius:.4rem;text-decoration:none}
+.how-i-work a:is(:hover,:focus-visible){border-color:#496e56;box-shadow:0 6px 16px #132c261a}
+.how-i-work small{color:var(--muted)}
+.how-i-work strong{font:500 1.35rem/1.15 Georgia,serif}
+.how-i-work span{font-size:.92rem;color:var(--muted);line-height:1.45}
+@media(max-width:900px){.how-i-work ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.how-i-work ol{grid-template-columns:1fr}}
+/* Credentials and toolkit */
+.credential-link{text-decoration:none;display:block}
+.credential-link:is(:hover,:focus-visible){border-color:#496e56}
+.toolkit{margin-top:1.6rem}
+.toolkit dl{margin:.4rem 0 0;display:grid;gap:.45rem}
+.toolkit dl div{display:grid;grid-template-columns:6.5rem 1fr;gap:.6rem;padding:.45rem 0;border-top:1px solid #c8d0c3}
+.toolkit dt{font-size:.75rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:.15rem}
+.toolkit dd{margin:0}
+/* Roles */
+.role-list{list-style:none;padding:0;margin:1rem 0}
+.role-list li{padding:.5rem 0;border-top:1px solid var(--line)}
+.degrees a.credential{padding:.55rem .8rem;border:1px solid #b9c7ba}
